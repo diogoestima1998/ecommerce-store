@@ -1,19 +1,23 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { SidebarContext } from '../contexts/SidebarContext'; //Sidebar context
-import { CartContext } from '../contexts/CartContext'; //Sidebar context
-import {BsBag} from 'react-icons/bs';
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import {Link, useNavigate } from 'react-router-dom';
-/* import Logo from '../img/men-suit-icon.svg';
- */
-
+import { SidebarContext } from '../contexts/SidebarContext'; // Sidebar context
+import { CartContext } from '../contexts/CartContext'; // Sidebar context
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { Link, useNavigate } from 'react-router-dom';
+import { Drawer, IconButton, List, ListItem, ListItemText, useMediaQuery, Box } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useTheme } from '@mui/material/styles';
+import { LuMenu } from "react-icons/lu";
 
 const Header = () => {
   const navigate = useNavigate(); // Define navigate using useNavigate
 
   const [isActive, setIsActive] = useState(false);
-  const {isOpen, setIsOpen} = useContext(SidebarContext);
-  const {itemAmount} = useContext(CartContext);
+  const { isOpen, setIsOpen } = useContext(SidebarContext);
+  const { itemAmount } = useContext(CartContext);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const Logo = () => (
     <svg className="w-[40px]" width="40" height="40" viewBox="0 0 122.88 115.02" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
@@ -23,18 +27,20 @@ const Header = () => {
     </svg>
   );
 
-  
-  //event listener
+  // Event listener
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      window.scrollY > 60 ? setIsActive(true) : setIsActive(false)
-    });
-  })
-  
+    const handleScroll = () => {
+      window.scrollY > 60 ? setIsActive(true) : setIsActive(false);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const handleLinkClick = (event, targetId) => {
     event.preventDefault();
     navigate(`/#${targetId}`);
-    // Delay to allow navigation to complete before scrolling
     setTimeout(() => {
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
@@ -43,35 +49,74 @@ const Header = () => {
     }, 100);
   };
 
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setDrawerOpen(open);
+  };
+
+  const list = () => (
+    <Box
+      sx={{ width: 250 }}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      <List>
+        <ListItem button component={Link} to="/" onClick={(e) => handleLinkClick(e, 'home')}>
+          <ListItemText primary="HOME" />
+        </ListItem>
+        <ListItem button component={Link} to="/all-products">
+          <ListItemText primary="ALL PRODUCTS" />
+        </ListItem>
+        <ListItem button component={Link} to="/" onClick={(e) => handleLinkClick(e, 'contacts')}>
+          <ListItemText primary="CONTACTS" />
+        </ListItem>
+      </List>
+    </Box>
+  );
+
   return (
-    <header className={`${isActive ? 'bg-white py-4 shadow-md': 'bg-none py-6 bg-black'} fixed w-full z-10 transition-all`}>
-      <div className='container mx-auto flex items-center justify-between h-full'>
-        {/* Logo */}
-        <Link to={'/'}>
-          <div className={`${isActive ? 'text-black' : 'text-white'}`}>
-            <Logo />
+    <header className={`${isActive ? 'bg-white py-4 shadow-md' : 'bg-none py-6 bg-black'} fixed w-full z-10 transition-all`}>
+      <div className="container mx-auto flex items-center justify-between h-full">
+        {/* Mobile Navigation */}
+        {isMobile ? (
+          <div onClick={toggleDrawer(true)} className={`${isActive ? 'text-black' : 'text-white'}`}>
+            <LuMenu className="w-8 h-8"/>
           </div>
-        </Link>
-        {/* Navigation Links */}
-        <nav className='flex gap-8'>
+        ) : (
+          <Link to={'/'}>
+            <div className={`${isActive ? 'text-black' : 'text-white'}`}>
+              <Logo />
+            </div>
+          </Link>
+        )}
+        <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+          {list()}
+        </Drawer>
+        {/* Desktop Navigation Links */}
+        <nav className="hidden md:flex gap-8">
           <Link to="/#home" onClick={(e) => handleLinkClick(e, 'home')} className={`${isActive ? 'text-black' : 'text-white'} text-lg`}>
             HOME
           </Link>
-          <Link to="/#products" onClick={(e) => handleLinkClick(e, 'products')} className={`${isActive ? 'text-black' : 'text-white'} text-lg`}>
-            PRODUCTS
+          <Link to="/all-products" className={`${isActive ? 'text-black' : 'text-white'} text-lg`}>
+            ALL PRODUCTS
           </Link>
           <Link to="/#contacts" onClick={(e) => handleLinkClick(e, 'contacts')} className={`${isActive ? 'text-black' : 'text-white'} text-lg`}>
             CONTACTS
           </Link>
         </nav>
         {/* Cart */}
-        <div onClick={() => setIsOpen(!isOpen)} className='cursor-pointer flex relative'>
-          <AiOutlineShoppingCart className={`${isActive ? 'text-black' : 'text-white'} text-3xl`}/>
-          <div className='bg-red-500 absolute -right-2 -bottom-2 text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center'>{itemAmount}</div>
+        <div onClick={() => setIsOpen(!isOpen)} className="cursor-pointer flex relative">
+          <AiOutlineShoppingCart className={`${isActive ? 'text-black' : 'text-white'} text-3xl`} />
+          <div className="bg-red-500 absolute -right-2 -bottom-2 text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
+            {itemAmount}
+          </div>
         </div>
       </div>
     </header>
-  )
+  );
 };
 
 export default Header;

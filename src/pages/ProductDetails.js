@@ -1,16 +1,19 @@
-import React, {useContext} from 'react';
-
+import React, {useState, useContext} from 'react';
 import { useParams } from 'react-router-dom';
 import { CartContext } from '../contexts/CartContext';
 import { ProductContext } from '../contexts/ProductContext';
 import Rating from '@mui/material/Rating';
-
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Snackbar from '@mui/material/Snackbar';
 
 const ProductDetails = () => {
   //get product id from the url
   const {id} = useParams()
   const {products} = useContext(ProductContext);
   const {addToCart} = useContext(CartContext);
+  const [open, setOpen] = useState(false);
 
   const product = products.find(item => {
     return item.id === parseInt(id);
@@ -23,8 +26,29 @@ const ProductDetails = () => {
 
   //destructure product
   const {title, price, description, image, rating} = product;
+  
 
   console.log("product:", product)
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const action = (
+    <IconButton
+      size="small"
+      aria-label="close"
+      onClick={handleClose}
+      style={{
+        backgroundColor: 'green',
+      }}
+    >
+      <CloseIcon fontSize="small" />
+    </IconButton>
+  );
 
   return (
     <section className='pt-32 pb-12 lg:py-32 h-screen flex items-center'>
@@ -44,10 +68,26 @@ const ProductDetails = () => {
             </div>
             <h2 className='font-semibold mb-1 flex'> {rating.rate}&nbsp;<Rating name="half-rating" defaultValue={rating.rate} precision={0.01} readOnly/>&nbsp;<span className='text-sm text-gray-500 flex justify-center items-center'>({rating.count} Ratings)</span></h2>
             <p className='mb-8'>{description}</p>
-            <button onClick={() => addToCart(product, product.id)} className='bg-primary py-4 px-8 text-white'>Add to cart</button>
+            <button onClick={() => {
+              addToCart(product, product.id)
+              setOpen(true);
+            }} className='bg-primary py-4 px-8 text-white'>
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
+      {/* Snackbar */}
+    <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
+      <Alert
+        onClose={handleClose}
+        severity="success"
+        variant="filled"
+        sx={{ width: '100%' }}
+      >
+        Item added to the cart!
+      </Alert>
+    </Snackbar>
     </section>
     )
 };

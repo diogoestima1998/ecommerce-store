@@ -211,13 +211,18 @@ const Checkout = () => {
               {cart.map((item) => (
                 <li key={item.id} className="flex justify-between items-center">
                   <div className="inline-flex">
-                    <div>
+                    
+                    {/* <div>
                         <img src={item.image} alt={item.name} className="max-h-16" />
-                    </div>
+                    </div> */}
                     <div className="ml-3 flex items-center">
+                        <div className='pr-4 flex items-center gap-x-4'>
+                          {/* Image */}
+                            <img className='max-w-[80px]' src={item.image} alt=''/>
+                        </div>
+                      
                       <div className='flex flex-col'>
-                        <p className="text-base font-semibold text-white">{item.amount}x&nbsp;</p>
-                        <p className="text-base font-semibold text-white">{item.name}</p>
+                        <p className="text-base font-semibold text-white">{item.amount}x&nbsp;{item.name}</p>
                       </div>
                       <p className="text-sm font-medium text-white text-opacity-80">{item.title}</p>
                     </div>

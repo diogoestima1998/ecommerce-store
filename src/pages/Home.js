@@ -5,6 +5,7 @@ import Hero from '../components/Hero';
 
 const Home = () => {
   const {products} = useContext(ProductContext);
+  console.log("products", products)
 
   //get men & women clothing
   const filteredProducts = products.filter(item => {
