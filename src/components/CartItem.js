@@ -24,7 +24,7 @@ const CartItem = ({item}) => {
               {title}
             </Link>
             {/* remove icon */}
-            <div onClick={() => removeFromCart(id)} className='text-xl cursor-pointer'>
+            <div onClick={() => removeFromCart(id)} className='text-xl cursor-pointer' data-testid="remove-button">
              <IoMdClose className='text-gray-500 hover:text-red-500 transition'/>
             </div>
           </div>
@@ -32,7 +32,7 @@ const CartItem = ({item}) => {
             {/* quantity */}
             <div className='flex flex-1 max-w-[100px] items-center h-full border text-primary font-medium'>
               {/* minus icon */}
-              <div onClick={() => decreaseAmount(id)} className='flex-1 h-full flex justify-center items-center cursor-pointer h-full'>
+              <div onClick={() => decreaseAmount(id)} className='flex-1 h-full flex justify-center items-center cursor-pointer h-full' data-testid="decrease-button">
                 <IoMdRemove/>
               </div>
               {/* amount */}
@@ -40,7 +40,7 @@ const CartItem = ({item}) => {
                 {amount}
               </div>
               {/* plus icon */}
-              <div onClick={() => increaseAmount(id)} className='flex-1 h-full flex justify-center items-center cursor-pointer'>
+              <div onClick={() => increaseAmount(id)} className='flex-1 h-full flex justify-center items-center cursor-pointer' data-testid="increase-button">
                 <IoMdAdd/>
               </div>
             </div>

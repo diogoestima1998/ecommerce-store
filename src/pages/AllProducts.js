@@ -36,7 +36,7 @@ const AllProducts = () => {
 
   return (
     <div>
-      <section id="products" className="py-16 h-full">
+      <section id="products" className="py-8 lg:py-16 h-full">
         <div className="container mx-auto">
           <Box className="mt-24 flex flex-wrap gap-4">
             <FormControl sx={{ mb: 2, flex: '1 1 20rem' }}>

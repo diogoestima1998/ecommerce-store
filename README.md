@@ -1,4 +1,5 @@
 # 🛍️ E-commerce Product Gallery Frontend
+[View Live Website](https://ecommerce-store-jade-gamma.vercel.app/)
 
 ## Project Overview
 This project is an e-commerce web application built with React and Tailwind CSS. It allows users to browse products, add them to a cart, and complete a purchase. The application provides a smooth user experience with a responsive design and interactive features.
@@ -98,7 +99,11 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 This application follows a component-based architecture, leveraging React's declarative UI paradigm. The main components include:
 
 Header: Navigation bar with links to different sections of the application.
+
 Footer: Sticks to the bottom of the page, providing basic information and links.
+
 Sidebar: Shows the shopping cart and allows users to manage their cart items.
+
 Product: Displays individual product details in the product listing.
+
 Pages: Separate pages for Home, All Products, Product Details, Checkout, and Order Complete.

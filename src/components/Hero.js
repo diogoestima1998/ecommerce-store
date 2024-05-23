@@ -5,7 +5,7 @@ import { LinkScroll } from 'react-scroll';
 
 const Hero = () => {
   return ( 
-  <section id='home' className='h-[600px] bg-hero bg-no-repeat bg-cover bg-center py-24'>
+  <section id='home' className='h-[600px] bg-hero bg-no-repeat bg-cover bg-center py-24 mt-12'>
     <div className='container mx-auto flex justify-around h-full'>
       {/* text */}
       <div className='flex flex-col justify-center'>

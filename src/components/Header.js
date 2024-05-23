@@ -64,13 +64,13 @@ const Header = () => {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        <ListItem button component={Link} to="/" onClick={(e) => handleLinkClick(e, 'home')}>
+        <ListItem component={Link} to="/" onClick={(e) => handleLinkClick(e, 'home')}>
           <ListItemText primary="HOME" />
         </ListItem>
-        <ListItem button component={Link} to="/all-products">
+        <ListItem  component={Link} to="/all-products">
           <ListItemText primary="ALL PRODUCTS" />
         </ListItem>
-        <ListItem button component={Link} to="/" onClick={(e) => handleLinkClick(e, 'contacts')}>
+        <ListItem component={Link} to="/" onClick={(e) => handleLinkClick(e, 'contacts')}>
           <ListItemText primary="CONTACTS" />
         </ListItem>
       </List>
