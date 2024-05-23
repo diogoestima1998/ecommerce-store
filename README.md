@@ -1,6 +1,7 @@
-# E-commerce Gallery
+# 🛍️ E-commerce Product Gallery Frontend
 
-This project is an e-commerce web application built with React. It allows users to browse products, add them to a cart, and complete a purchase. The application provides a smooth user experience with a responsive design and interactive features.
+## Project Overview
+This project is an e-commerce web application built with React and Tailwind CSS. It allows users to browse products, add them to a cart, and complete a purchase. The application provides a smooth user experience with a responsive design and interactive features.
 
 ## Screenshots
 
@@ -24,17 +25,40 @@ The user can add their payment information and shipping address. They also have 
 ![Order Complete Page](./src/img/order-complete-page.png)
 The user can see the confirmation of a successful purchase, along with all the transaction details and the expected shipping time.
 
+## Features
+
+- **Product Listing**: Fetch and display a list of products from the Fake Store API. Each product shows an image, rating, name, price, an "Add to Cart" button and "View More" button.
+- **Product Details**: Click on a product to see a more detailed view.
+- **Shopping Cart**: Add products to the cart, view selected items, adjust quantities, and remove items.
+- **Checkout Process**: Simple checkout form to enter mock payment and shipping information.
+- **Search and Filter**: Search for products by name and filter by category, price, reviews, and purchases.
+- **Responsive Design**: Engaging and responsive design that adapts well across devices.
+
+## Getting Started
+
+### Prerequisites
+
+Ensure you have the following installed:
+- Node.js
+- npm (Node Package Manager)
+
+### Installation
+
+1. Clone the repository:
+
+#### `git clone https://github.com/diogoestima1998/ecommerce-gallery.git`
+
+2. Navigate to the project directory:
+
 ## Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### `cd ecommerce-gallery`
 
-### Available Scripts
-
-In the project directory, you can run:
+3. Install the dependencies:
 
 #### `npm install`
 
-Installs all the dependencies required for the project.
+4. Running the Application:
 
 #### `npm start`
 
@@ -69,32 +93,12 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However, we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Architectural Overview**
+This application follows a component-based architecture, leveraging React's declarative UI paradigm. The main components include:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Header: Navigation bar with links to different sections of the application.
+Footer: Sticks to the bottom of the page, providing basic information and links.
+Sidebar: Shows the shopping cart and allows users to manage their cart items.
+Product: Displays individual product details in the product listing.
+Pages: Separate pages for Home, All Products, Product Details, Checkout, and Order Complete.
